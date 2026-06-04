@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>App BTP Pro</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{
+  font-family:Arial;
+  background:#f2f2f2;
+  padding:15px;
+}
+
+h1{
+  text-align:center;
+}
+
+.box{
+  background:white;
+  padding:15px;
+  margin-top:15px;
+  border-radius:10px;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background:#1976d2;
+  color:white;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:5px;
+  font-size:16px;
+}
+
+.result{
+  margin-top:10px;
+  font-size:20px;
+  font-weight:bold;
+}
+</style>
+</head>
+<div class="box">
+<h2>💰 Abonnements</h2>
+
+<button onclick="abonnement('gratuit')">
+🆓 Gratuit
+</button>
+
+<button onclick="abonnement('pro')">
+⭐ PRO — 6€/mois
+</button>
+
+<button onclick="abonnement('expert')">
+👑 EXPERT — 12€/mois
+</button>
+</div>
+
+<div class="box">
+<h2>♿ Accessibilité</h2>
+
+<button onclick="modeContraste()">
+🎨 Mode contraste élevé
+</button>
+</div>
+<body>
+
+<h1>🏗️ App BTP Pro</h1>
+
+<!-- CALCULS -->
+<div class="box">
+<h2>🧮 Calculs Chantier</h2>
+
+<input id="longueur" placeholder="Longueur (m)">
+<input id="largeur" placeholder="Largeur (m)">
+<button onclick="calcM2()">Calcul m²</button>
+
+<input id="hauteur" placeholder="Hauteur (m)">
+<button onclick="calcM3()">Calcul m³</button>
+
+<input id="penteH" placeholder="Hauteur pente">
+<input id="penteD" placeholder="Distance pente">
+<button onclick="calcPente()">Calcul pente %</button>
+
+<div class="result" id="resultat"></div>
+</div>
+
+<!-- MÉTÉO -->
+<div class="box">
+<h2>🌦️ Météo Chantier</h2>
+
+<button onclick="meteo()">Voir météo chantier</button>
+
+<div class="result" id="meteoResult"></div>
+</div>
+
+<!-- MÉTIERS -->
+<div class="box">
+<h2>🧰 Métiers / Outils</h2>
+
+<button onclick="metier('macon')">Maçon</button>
+<button onclick="metier('vrd')">VRD</button>
+<button onclick="metier('etancheite')">Étanchéité</button>
+<button onclick="metier('echafaudage')">Échafaudage</button>
+
+<div class="result" id="metierResult"></div>
+</div>
+
+<script>
+
+// ====================
+// CALCUL M2
+// ====================
+
+function calcM2(){
+let l = parseFloat(document.getElementById("longueur").value);
+let L = parseFloat(document.getElementById("largeur").value);
+
+let res = l * L;
+
+document.getElementById("resultat").innerHTML =
+"📐 Surface : " + res + " m²";
+
+speak("Surface " + res + " mètres carrés");
+}
+
+// ====================
+// CALCUL M3
+// ====================
+
+function calcM3(){
+let l = parseFloat(document.getElementById("longueur").value);
+let L = parseFloat(document.getElementById("largeur").value);
+let h = parseFloat(document.getElementById("hauteur").value);
+
+let res = l * L * h;
+
+document.getElementById("resultat").innerHTML =
+"🧱 Volume : " + res + " mètre cube";
+
+speak("Volume " + res + " mètres cubes");
+}
+
+// ====================
+// CALCUL PENTE
+// ====================
+
+function calcPente(){
+let h = parseFloat(document.getElementById("penteH").value);
+let d = parseFloat(document.getElementById("penteD").value);
+
+let res = (h/d)*100;
+
+document.getElementById("resultat").innerHTML =
+"📏 Pente : " + res.toFixed(2) + " %";
+
+speak("Pente " + res.toFixed(2) + " pourcent");
+}
+
+// ====================
+// METEO
+// ====================
+
+function meteo(){
+
+let temp = 18;
+let vent = 20;
+
+let message = "🌤️ Température : "
++ temp + "°C<br>💨 Vent : "
++ vent + " km/h<br>";
+
+if(vent > 40){
+message += "⚠️ Vent fort chantier";
+}
+else{
+message += "✔️ Conditions normales";
+}
+
+document.getElementById("meteoResult").innerHTML = message;
+
+speak("Température " + temp + " degrés");
+}
+
+// ====================
+// METIERS
+// ====================
+
+function metier(type){
+
+let texte = "";
+
+if(type=="macon"){
+texte = "🧱 Maçon : truelle, bétonnière, ciment";
+}
+
+if(type=="vrd"){
+texte = "🚧 VRD : pelle, niveau laser, compacteur";
+}
+
+if(type=="etancheite"){
+texte = "💧 Étanchéité : membrane, rouleau, chalumeau";
+}
+
+if(type=="echafaudage"){
+texte = "🏗️ Échafaudage : harnais, casque, sécurité";
+}
+
+document.getElementById("metierResult").innerHTML = texte;
+
+speak(texte);
+}
+
+// ====================
+// VOIX ACCESSIBILITÉ
+// ====================
+
+function speak(text){
+let msg = new SpeechSynthesisUtterance(text);
+msg.lang = "fr-FR";
+speechSynthesis.speak(msg);
+}
+
+</script>
+<script src="calculs.js"></script>
+<script src="meteo.js"></script>
+<script src="outils.js"></script>
+<script src="accessibilite.js"></script>
+<script src="abonnement.js"></script>
+<script src="app.js"></script> 
+<script src="utilisateurs.js"></script>
+<script src="gps.js"></script>
+<script src="pdf.js"></script>
+<script src="securite.js"></script>
+<script src="ia.js"></script>
+<script src="offline.js"></script>
+<script src="notifications.js"></script>
+<div class="box">
+<h2>⚙️ Fonctions Avancées</h2>
+
+<button onclick="connexion()">👤 Connexion</button>
+
+<button onclick="gps()">📍 GPS Chantier</button>
+
+<button onclick="exportPDF()">📄 Export PDF</button>
+
+<button onclick="securite()">🚨 Sécurité Chantier</button>
+
+<button onclick="assistantIA()">🧠 Assistant IA</button>
+
+<button onclick="offline()">📶 Mode Hors Ligne</button>
+
+<button onclick="notificationChantier()">🔔 Notifications</button>
+
+</div>
+</body>
+</html>
