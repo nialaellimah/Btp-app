@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTP Pro Ultra</title>
+
+<style>
+body{font-family:Arial;background:#f2f2f2;padding:15px}
+h1{text-align:center}
+
+.premium{
+background:linear-gradient(90deg,gold,orange);
+padding:15px;
+text-align:center;
+font-weight:bold;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.modebar{
+padding:10px;
+text-align:center;
+font-weight:bold;
+border-radius:8px;
+margin-bottom:15px;
+color:white;
+}
+
+.ouvrier{background:#2196F3}
+.chef{background:#4CAF50}
+.conducteur{background:#9C27B0}
+
+.box{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#1e88e5;
+color:white;
+border:none;
+border-radius:8px;
+}
+
+img{
+width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🏗️ BTP Pro Ultra</h1>
+
+<div class="premium">
+💳 Abonnement Premium : 3,50€ / mois
+</div>
+
+<div id="modeBar" class="modebar ouvrier">MODE : OUVRIER</div>
+
+<!-- MODE -->
+<div class="box">
+<h2>🎛️ Mode chantier</h2>
+<button onclick="setMode('ouvrier')">Ouvrier</button>
+<button onclick="setMode('chef')">Chef chantier</button>
+<button onclick="setMode('conducteur')">Conducteur</button>
+</div>
+
+<!-- VITESSE -->
+<div class="box">
+<h2>🚴 Vitesse</h2>
+<input id="d" type="number" placeholder="Distance km">
+<input id="t" type="number" placeholder="Temps h">
+<button onclick="vitesse()">Calculer</button>
+<p id="r1"></p>
+</div>
+
+<!-- ALTIMETRIE -->
+<div class="box">
+<h2>📏 Altimétrie</h2>
+<input id="a1" type="number" placeholder="Point A">
+<input id="a2" type="number" placeholder="Point B">
+<button onclick="altimetrie()">Calculer</button>
+<p id="r2"></p>
+</div>
+
+<!-- BETON -->
+<div class="box">
+<h2>🧱 Béton</h2>
+<input id="L" type="number" placeholder="Longueur">
+<input id="l" type="number" placeholder="Largeur">
+<input id="h" type="number" placeholder="Hauteur">
+<button onclick="beton()">Calculer</button>
+<p id="r3"></p>
+</div>
+
+<!-- MATERIAUX -->
+<div class="box">
+<h2>📦 Matériaux</h2>
+<input id="s" type="number" placeholder="Surface m²">
+<button onclick="materiaux()">Calculer</button>
+<p id="r4"></p>
+</div>
+
+<!-- TERRASSEMENT -->
+<div class="box">
+<h2>🏗️ Terrassement</h2>
+<input id="ts" type="number" placeholder="Surface">
+<input id="tp" type="number" placeholder="Profondeur">
+<button onclick="terrassement()">Calculer</button>
+<p id="r5"></p>
+</div>
+
+<!-- SEAU -->
+<div class="box">
+<h2>🪣 Seaux</h2>
+<input id="v" type="number" placeholder="Volume m³">
+<button onclick="seau()">Calculer</button>
+<p id="r6"></p>
+</div>
+
+<!-- REMBLAIS -->
+<div class="box">
+<h2>🪨 Remblais</h2>
+<input id="rh" type="number" placeholder="Hauteur">
+<input id="rc" type="number" placeholder="Couche">
+<button onclick="remblais()">Calculer</button>
+<p id="r7"></p>
+</div>
+
+<!-- HOBO -->
+<div class="box">
+<h2>🧠 Sécurité HOBO</h2>
+<button onclick="hobo(1)">Réseaux vérifiés</button>
+<button onclick="hobo(0)">Non vérifié</button>
+<p id="r8"></p>
+</div>
+
+<!-- QCM -->
+<div class="box">
+<h2>📊 QCM chantier</h2>
+<button onclick="qcm()">Question</button>
+<p id="r9"></p>
+</div>
+
+<!-- DIPLOME -->
+<div class="box">
+<h2>🏆 Diplôme</h2>
+<button onclick="diplome()">Obtenir</button>
+<p id="r10"></p>
+</div>
+
+<!-- MACHINES -->
+<div class="box">
+<h2>🚜 Machines</h2>
+<button onclick="machines()">Afficher</button>
+<div id="r11"></div>
+</div>
+
+<script>
+
+let mode="OUVRIER";
+let hoboScore=0;
+let q=0;
+
+// MODE
+function setMode(m){
+mode=m;
+document.getElementById("modeBar").className="modebar "+m;
+document.getElementById("modeBar").innerText="MODE : "+m.toUpperCase();
+}
+
+// VITESSE
+function vitesse(){
+let d=document.getElementById("d").value;
+let t=document.getElementById("t").value;
+if(t==0 || t=="") return;
+document.getElementById("r1").innerText=(d/t).toFixed(2)+" km/h";
+}
+
+// ALTIMETRIE
+function altimetrie(){
+let a=document.getElementById("a1").value;
+let b=document.getElementById("a2").value;
+document.getElementById("r2").innerText=Math.abs(a-b)+" m";
+}
+
+// BETON
+function beton(){
+let v=L.value*l.value*h.value;
+document.getElementById("r3").innerText=
+v+" m³ | ciment ≈ "+(v*350).toFixed(0)+" kg";
+}
+
+// MATERIAUX
+function materiaux(){
+let s=s.value;
+document.getElementById("r4").innerHTML=
+"Parpaings "+(s*10)+"<br>Briques "+(s*50)+"<br>Pavés "+(s*40);
+}
+
+// TERRASSEMENT
+function terrassement(){
+let v=ts.value*tp.value;
+document.getElementById("r5").innerText=v+" m³";
+}
+
+// SEAU
+function seau(){
+document.getElementById("r6").innerText=(v.value*100)+" seaux";
+}
+
+// REMBLAIS
+function remblais(){
+document.getElementById("r7").innerText=
+Math.ceil(rh.value/rc.value)+" couches";
+}
+
+// HOBO
+function hobo(v){
+hoboScore+=v;
+document.getElementById("r8").innerText="Score sécurité "+hoboScore;
+}
+
+// QCM
+function qcm(){
+let list=[
+"Casque obligatoire ?",
+"EPI obligatoire ?",
+"Réseaux avant terrassement ?",
+"Zone sécurisée ?",
+"Signalisation ?"
+];
+document.getElementById("r9").innerText=list[q];
+q++;
+if(q>=list.length) q=0;
+}
+
+// DIPLOME
+function diplome(){
+document.getElementById("r10").innerText=
+"🏆 Certificat BTP validé (simulation)";
+}
+
+// MACHINES
+function machines(){
+document.getElementById("r11").innerHTML=`
+🚜 Pelle<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Excavator.jpg">
+
+🚜 Bulldozer<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Bulldozer.jpg">
+
+🚜 Compacteur<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Road_roller.jpg">
+
+🚜 Camion benne<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Dump_truck.jpg">
+`;
+}
+
+</script>
+
+</body>
+</html>
