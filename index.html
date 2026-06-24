@@ -2,538 +2,139 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BTP Pro Ultra</title>
+<title>App BTP - QCM AIPR H0B0</title>
 
-<style>
-body{font-family:Arial;background:#f2f2f2;padding:15px}
-h1{text-align:center}
-
-.premium{
-background:linear-gradient(90deg,gold,orange);
-padding:15px;
-text-align:center;
-font-weight:bold;
-border-radius:10px;
-margin-bottom:15px;
-}
-
-.modebar{
-padding:10px;
-text-align:center;
-font-weight:bold;
-border-radius:8px;
-margin-bottom:15px;
-color:white;
-}
-
-.ouvrier{background:#2196F3}
-.chef{background:#4CAF50}
-.conducteur{background:#9C27B0}
-
-.box{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-bottom:15px;
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:8px;
-}
-
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-background:#1e88e5;
-color:white;
-border:none;
-border-radius:8px;
-}
-
-img{
-width:100%;
-border-radius:10px;
-margin-top:10px;
-}
-</style>
-</head>
-
-<body>
-
-<h1>🏗️ BTP Pro Ultra</h1>
-
-<div class="premium">
-💳 Abonnement Premium : 3,50€ / mois
-</div>
-
-<div id="modeBar" class="modebar ouvrier">MODE : OUVRIER</div>
-
-<!-- MODE -->
-<div class="box">
-<h2>🎛️ Mode chantier</h2>
-<button onclick="setMode('ouvrier')">Ouvrier</button>
-<button onclick="setMode('chef')">Chef chantier</button>
-<button onclick="setMode('conducteur')">Conducteur</button>
-</div>
-
-<!-- VITESSE -->
-<div class="box">
-<h2>🚴 Vitesse</h2>
-<input id="d" type="number" placeholder="Distance km">
-<input id="t" type="number" placeholder="Temps h">
-<button onclick="vitesse()">Calculer</button>
-<p id="r1"></p>
-</div>
-
-<!-- ALTIMETRIE -->
-<div class="box">
-<h2>📏 Altimétrie</h2>
-<input id="a1" type="number" placeholder="Point A">
-<input id="a2" type="number" placeholder="Point B">
-<button onclick="altimetrie()">Calculer</button>
-<p id="r2"></p>
-</div>
-
-<!-- BETON -->
-<div class="box">
-<h2>🧱 Béton</h2>
-<input id="L" type="number" placeholder="Longueur">
-<input id="l" type="number" placeholder="Largeur">
-<input id="h" type="number" placeholder="Hauteur">
-<button onclick="beton()">Calculer</button>
-<p id="r3"></p>
-</div>
-
-<!-- MATERIAUX -->
-<div class="box">
-<h2>📦 Matériaux</h2>
-<input id="s" type="number" placeholder="Surface m²">
-<button onclick="materiaux()">Calculer</button>
-<p id="r4"></p>
-</div>
-
-<!-- TERRASSEMENT -->
-<div class="box">
-<h2>🏗️ Terrassement</h2>
-<input id="ts" type="number" placeholder="Surface">
-<input id="tp" type="number" placeholder="Profondeur">
-<button onclick="terrassement()">Calculer</button>
-<p id="r5"></p>
-</div>
-
-<!-- SEAU -->
-<div class="box">
-<h2>🪣 Seaux</h2>
-<input id="v" type="number" placeholder="Volume m³">
-<button onclick="seau()">Calculer</button>
-<p id="r6"></p>
-</div>
-
-<!-- REMBLAIS -->
-<div class="box">
-<h2>🪨 Remblais</h2>
-<input id="rh" type="number" placeholder="Hauteur">
-<input id="rc" type="number" placeholder="Couche">
-<button onclick="remblais()">Calculer</button>
-<p id="r7"></p>
-</div>
-
-<!-- HOBO -->
-<div class="box">
-<h2>🧠 Sécurité HOBO</h2>
-<button onclick="hobo(1)">Réseaux vérifiés</button>
-<button onclick="hobo(0)">Non vérifié</button>
-<p id="r8"></p>
-</div>
-
-<!-- QCM -->
-<div class="box">
-<h2>📊 QCM chantier</h2>
-<button onclick="qcm()">Question</button>
-<p id="r9"></p>
-</div>
-
-<!-- DIPLOME -->
-<div class="box">
-<h2>🏆 Diplôme</h2>
-<button onclick="diplome()">Obtenir</button>
-<p id="r10"></p>
-</div>
-
-<!-- MACHINES -->
-<div class="box">
-<h2>🚜 Machines</h2>
-<button onclick="machines()">Afficher</button>
-<div id="r11"></div>
-=======
-<title>App BTP Pro</title>
-<link rel="stylesheet" href="style.css">
 <style>
 body{
-  font-family:Arial;
-  background:#f2f2f2;
-  padding:15px;
-}
-
-h1{
-  text-align:center;
-}
-
-.box{
-  background:white;
-  padding:15px;
-  margin-top:15px;
-  border-radius:10px;
+font-family: Arial;
+padding: 10px;
 }
 
 button{
-  width:100%;
-  padding:15px;
-  margin-top:10px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  background:#1976d2;
-  color:white;
+margin: 5px;
+padding: 10px;
+cursor: pointer;
 }
 
-input{
-  width:100%;
-  padding:12px;
-  margin-top:5px;
-  font-size:16px;
-}
-
-.result{
-  margin-top:10px;
-  font-size:20px;
-  font-weight:bold;
+#quiz, #meteo{
+margin-bottom: 30px;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 10px;
 }
 </style>
 </head>
-<div class="box">
-<h2>💰 Abonnements</h2>
 
-<button onclick="abonnement('gratuit')">
-🆓 Gratuit
-</button>
-
-<button onclick="abonnement('pro')">
-⭐ PRO — 6€/mois
-</button>
-
-<button onclick="abonnement('expert')">
-👑 EXPERT — 12€/mois
-</button>
-</div>
-
-<div class="box">
-<h2>♿ Accessibilité</h2>
-
-<button onclick="modeContraste()">
-🎨 Mode contraste élevé
-</button>
-</div>
 <body>
 
-<h1>🏗️ App BTP Pro</h1>
+<h1>App BTP - QCM AIPR / H0B0</h1>
 
-<!-- CALCULS -->
-<div class="box">
-<h2>🧮 Calculs Chantier</h2>
+<!-- ================= QCM ================= -->
+<div id="quiz">
+<h2>QCM Sécurité</h2>
 
-<input id="longueur" placeholder="Longueur (m)">
-<input id="largeur" placeholder="Largeur (m)">
-<button onclick="calcM2()">Calcul m²</button>
+<div id="question"></div>
+<div id="answers"></div>
 
-<input id="hauteur" placeholder="Hauteur (m)">
-<button onclick="calcM3()">Calcul m³</button>
-
-<input id="penteH" placeholder="Hauteur pente">
-<input id="penteD" placeholder="Distance pente">
-<button onclick="calcPente()">Calcul pente %</button>
-
-<div class="result" id="resultat"></div>
+<p id="score"></p>
 </div>
 
-<!-- MÉTÉO -->
-<div class="box">
-<h2>🌦️ Météo Chantier</h2>
+<!-- ================= METEO ================= -->
+<div id="meteo">
+<h2>Météo chantier</h2>
 
-<button onclick="meteo()">Voir météo chantier</button>
+<input id="vent" placeholder="Vent km/h">
+<input id="temp" placeholder="Température °C">
 
-<div class="result" id="meteoResult"></div>
-</div>
+<button onclick="meteo()">Tester</button>
 
-<!-- MÉTIERS -->
-<div class="box">
-<h2>🧰 Métiers / Outils</h2>
-
-<button onclick="metier('macon')">Maçon</button>
-<button onclick="metier('vrd')">VRD</button>
-<button onclick="metier('etancheite')">Étanchéité</button>
-<button onclick="metier('echafaudage')">Échafaudage</button>
-
-<div class="result" id="metierResult"></div>
->>>>>>> aafecf986dc741d41e7c258638668de9d4ba5575
+<div id="meteoResult"></div>
 </div>
 
 <script>
+/* ================= QCM ================= */
 
-<<<<<<< HEAD
-let mode="OUVRIER";
-let hoboScore=0;
-let q=0;
+let current = 0;
+let score = 0;
 
-// MODE
-function setMode(m){
-mode=m;
-document.getElementById("modeBar").className="modebar "+m;
-document.getElementById("modeBar").innerText="MODE : "+m.toUpperCase();
+const questions = [
+{
+q: "Que faire avant de creuser ?",
+a: ["Appeler les secours", "Consulter les réseaux enterrés", "Rien"],
+r: 1
+},
+{
+q: "H0B0 signifie ?",
+a: ["Travaux électriques sans habilitation", "Peinture", "Maçonnerie"],
+r: 0
+},
+{
+q: "Un câble électrique est découvert, je fais quoi ?",
+a: ["Je touche", "Je signale et je m’éloigne", "Je coupe"],
+r: 1
+},
+{
+q: "AIPR sert à ?",
+a: ["Travailler sur routes", "Travailler près des réseaux", "Peindre"],
+r: 1
 }
-
-// VITESSE
-function vitesse(){
-let d=document.getElementById("d").value;
-let t=document.getElementById("t").value;
-if(t==0 || t=="") return;
-document.getElementById("r1").innerText=(d/t).toFixed(2)+" km/h";
-}
-
-// ALTIMETRIE
-function altimetrie(){
-let a=document.getElementById("a1").value;
-let b=document.getElementById("a2").value;
-document.getElementById("r2").innerText=Math.abs(a-b)+" m";
-}
-
-// BETON
-function beton(){
-let v=L.value*l.value*h.value;
-document.getElementById("r3").innerText=
-v+" m³ | ciment ≈ "+(v*350).toFixed(0)+" kg";
-}
-
-// MATERIAUX
-function materiaux(){
-let s=s.value;
-document.getElementById("r4").innerHTML=
-"Parpaings "+(s*10)+"<br>Briques "+(s*50)+"<br>Pavés "+(s*40);
-}
-
-// TERRASSEMENT
-function terrassement(){
-let v=ts.value*tp.value;
-document.getElementById("r5").innerText=v+" m³";
-}
-
-// SEAU
-function seau(){
-document.getElementById("r6").innerText=(v.value*100)+" seaux";
-}
-
-// REMBLAIS
-function remblais(){
-document.getElementById("r7").innerText=
-Math.ceil(rh.value/rc.value)+" couches";
-}
-
-// HOBO
-function hobo(v){
-hoboScore+=v;
-document.getElementById("r8").innerText="Score sécurité "+hoboScore;
-}
-
-// QCM
-function qcm(){
-let list=[
-"Casque obligatoire ?",
-"EPI obligatoire ?",
-"Réseaux avant terrassement ?",
-"Zone sécurisée ?",
-"Signalisation ?"
 ];
-document.getElementById("r9").innerText=list[q];
-q++;
-if(q>=list.length) q=0;
+
+function loadQuestion(){
+let q = questions[current];
+
+document.getElementById("question").innerHTML = "<b>" + q.q + "</b>";
+
+let html = "";
+
+q.a.forEach((rep, i)=>{
+html += `<button onclick="checkAnswer(${i})">${rep}</button><br>`;
+});
+
+document.getElementById("answers").innerHTML = html;
 }
 
-// DIPLOME
-function diplome(){
-document.getElementById("r10").innerText=
-"🏆 Certificat BTP validé (simulation)";
+function checkAnswer(i){
+if(i === questions[current].r){
+score++;
+}
+nextQuestion();
 }
 
-// MACHINES
-function machines(){
-document.getElementById("r11").innerHTML=`
-🚜 Pelle<br>
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Excavator.jpg">
+function nextQuestion(){
+current++;
 
-🚜 Bulldozer<br>
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Bulldozer.jpg">
-
-🚜 Compacteur<br>
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Road_roller.jpg">
-
-🚜 Camion benne<br>
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Dump_truck.jpg">
-`;
+if(current < questions.length){
+loadQuestion();
+}else{
+document.getElementById("quiz").innerHTML =
+"✔️ QCM terminé <br> Score : " + score + "/" + questions.length;
+}
 }
 
-</script>
+loadQuestion();
 
-=======
-// ====================
-// CALCUL M2
-// ====================
 
-function calcM2(){
-let l = parseFloat(document.getElementById("longueur").value);
-let L = parseFloat(document.getElementById("largeur").value);
-
-let res = l * L;
-
-document.getElementById("resultat").innerHTML =
-"📐 Surface : " + res + " m²";
-
-speak("Surface " + res + " mètres carrés");
-}
-
-// ====================
-// CALCUL M3
-// ====================
-
-function calcM3(){
-let l = parseFloat(document.getElementById("longueur").value);
-let L = parseFloat(document.getElementById("largeur").value);
-let h = parseFloat(document.getElementById("hauteur").value);
-
-let res = l * L * h;
-
-document.getElementById("resultat").innerHTML =
-"🧱 Volume : " + res + " mètre cube";
-
-speak("Volume " + res + " mètres cubes");
-}
-
-// ====================
-// CALCUL PENTE
-// ====================
-
-function calcPente(){
-let h = parseFloat(document.getElementById("penteH").value);
-let d = parseFloat(document.getElementById("penteD").value);
-
-let res = (h/d)*100;
-
-document.getElementById("resultat").innerHTML =
-"📏 Pente : " + res.toFixed(2) + " %";
-
-speak("Pente " + res.toFixed(2) + " pourcent");
-}
-
-// ====================
-// METEO
-// ====================
+/* ================= METEO ================= */
 
 function meteo(){
 
-let temp = 18;
-let vent = 20;
+let vent = Number(document.getElementById("vent").value);
+let temp = Number(document.getElementById("temp").value);
 
-let message = "🌤️ Température : "
-+ temp + "°C<br>💨 Vent : "
-+ vent + " km/h<br>";
+let message = "";
 
 if(vent > 40){
-message += "⚠️ Vent fort chantier";
+message += "⚠️ Vent fort chantier<br>";
+}else{
+message += "✔️ Conditions normales<br>";
 }
-else{
-message += "✔️ Conditions normales";
-}
+
+message += "Température : " + temp + "°C";
 
 document.getElementById("meteoResult").innerHTML = message;
-
-speak("Température " + temp + " degrés");
 }
-
-// ====================
-// METIERS
-// ====================
-
-function metier(type){
-
-let texte = "";
-
-if(type=="macon"){
-texte = "🧱 Maçon : truelle, bétonnière, ciment";
-}
-
-if(type=="vrd"){
-texte = "🚧 VRD : pelle, niveau laser, compacteur";
-}
-
-if(type=="etancheite"){
-texte = "💧 Étanchéité : membrane, rouleau, chalumeau";
-}
-
-if(type=="echafaudage"){
-texte = "🏗️ Échafaudage : harnais, casque, sécurité";
-}
-
-document.getElementById("metierResult").innerHTML = texte;
-
-speak(texte);
-}
-
-// ====================
-// VOIX ACCESSIBILITÉ
-// ====================
-
-function speak(text){
-let msg = new SpeechSynthesisUtterance(text);
-msg.lang = "fr-FR";
-speechSynthesis.speak(msg);
-}
-
 </script>
-<script src="calculs.js"></script>
-<script src="meteo.js"></script>
-<script src="outils.js"></script>
-<script src="accessibilite.js"></script>
-<script src="abonnement.js"></script>
-<script src="app.js"></script> 
-<script src="utilisateurs.js"></script>
-<script src="gps.js"></script>
-<script src="pdf.js"></script>
-<script src="securite.js"></script>
-<script src="ia.js"></script>
-<script src="offline.js"></script>
-<script src="notifications.js"></script>
-<div class="box">
-<h2>⚙️ Fonctions Avancées</h2>
 
-<button onclick="connexion()">👤 Connexion</button>
-
-<button onclick="gps()">📍 GPS Chantier</button>
-
-<button onclick="exportPDF()">📄 Export PDF</button>
-
-<button onclick="securite()">🚨 Sécurité Chantier</button>
-
-<button onclick="assistantIA()">🧠 Assistant IA</button>
-
-<button onclick="offline()">📶 Mode Hors Ligne</button>
-
-<button onclick="notificationChantier()">🔔 Notifications</button>
-
-</div>
->>>>>>> aafecf986dc741d41e7c258638668de9d4ba5575
 </body>
 </html>
