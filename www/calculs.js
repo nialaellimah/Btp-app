@@ -1,56 +1,107 @@
 // ======================
-// CALCUL M²
+// SURFACE
 // ======================
 
 function calcM2(){
 
-let l = parseFloat(document.getElementById("longueur").value);
+let l = parseFloat(document.getElementById("longueur").value) || 0;
+let L = parseFloat(document.getElementById("largeur").value) || 0;
 
-let L = parseFloat(document.getElementById("largeur").value);
-
-let res = l * L;
+let surface = l * L;
 
 document.getElementById("resultat").innerHTML =
-"📐 Surface : " + res + " m²";
-
-speak("Surface " + res + " mètres carrés");
+"📐 Surface : " + surface.toFixed(2) + " m²";
 }
 
 // ======================
-// CALCUL M³
+// PERIMETRE
+// ======================
+
+function calcPerimetre(){
+
+let l = parseFloat(document.getElementById("longueur").value) || 0;
+let L = parseFloat(document.getElementById("largeur").value) || 0;
+
+let perimetre = 2 * (l + L);
+
+document.getElementById("resultat").innerHTML =
+"📏 Périmètre : " + perimetre.toFixed(2) + " m";
+}
+
+// ======================
+// VOLUME
 // ======================
 
 function calcM3(){
 
-let l = parseFloat(document.getElementById("longueur").value);
+let l = parseFloat(document.getElementById("longueur").value) || 0;
+let L = parseFloat(document.getElementById("largeur").value) || 0;
+let h = parseFloat(document.getElementById("hauteur").value) || 0;
 
-let L = parseFloat(document.getElementById("largeur").value);
-
-let h = parseFloat(document.getElementById("hauteur").value);
-
-let res = l * L * h;
+let volume = l * L * h;
 
 document.getElementById("resultat").innerHTML =
-"🧱 Volume : " + res + " mètre cube";
-
-speak("Volume " + res + " mètres cubes");
+"🧱 Volume : " + volume.toFixed(2) + " m³";
 }
 
 // ======================
-// CALCUL PENTE
+// MASSE BETON
+// ======================
+
+function calcMasse(){
+
+let l = parseFloat(document.getElementById("longueur").value) || 0;
+let L = parseFloat(document.getElementById("largeur").value) || 0;
+let h = parseFloat(document.getElementById("hauteur").value) || 0;
+
+let volume = l * L * h;
+
+let masse = volume * 2400;
+
+document.getElementById("resultat").innerHTML =
+"⚖️ Masse béton : " +
+(masse/1000).toFixed(2) +
+" tonnes";
+}
+
+// ======================
+// PENTE
 // ======================
 
 function calcPente(){
 
-let h = parseFloat(document.getElementById("penteH").value);
+let h = parseFloat(document.getElementById("penteH").value) || 0;
+let d = parseFloat(document.getElementById("penteD").value) || 0;
 
-let d = parseFloat(document.getElementById("penteD").value);
+if(d === 0){
+return;
+}
 
 let res = (h/d)*100;
 
 document.getElementById("resultat").innerHTML =
 "📏 Pente : " + res.toFixed(2) + " %";
-
-speak("Pente " + res.toFixed(2) + " pourcent");
 }
 
+// ======================
+// IMPLANTATION COMPLETE
+// ======================
+
+function implantation(){
+
+let l = parseFloat(document.getElementById("longueur").value) || 0;
+let L = parseFloat(document.getElementById("largeur").value) || 0;
+let h = parseFloat(document.getElementById("hauteur").value) || 0;
+
+let perimetre = 2*(l+L);
+let surface = l*L;
+let volume = surface*h;
+let masse = volume*2400;
+
+document.getElementById("resultat").innerHTML =
+"📏 Périmètre : " + perimetre.toFixed(2) + " m<br>" +
+"📐 Surface : " + surface.toFixed(2) + " m²<br>" +
+"🧱 Volume : " + volume.toFixed(2) + " m³<br>" +
+"⚖️ Masse : " + (masse/1000).toFixed(2) + " t";
+}
+EOF

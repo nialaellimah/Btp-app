@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>App BTP Pro</title>
 <link rel="stylesheet" href="style.css">
+
 <style>
 body{
   font-family:Arial;
@@ -26,7 +27,7 @@ button{
   width:100%;
   padding:15px;
   margin-top:10px;
-  font-size:18px;
+  font-size:16px;
   border:none;
   border-radius:10px;
   background:#1976d2;
@@ -35,230 +36,154 @@ button{
 
 input{
   width:100%;
-  padding:12px;
+  padding:10px;
   margin-top:5px;
   font-size:16px;
 }
 
 .result{
   margin-top:10px;
-  font-size:20px;
   font-weight:bold;
 }
 </style>
 </head>
-<div class="box">
-<h2>💰 Abonnements</h2>
 
-<button onclick="abonnement('gratuit')">
-🆓 Gratuit
-</button>
-
-<button onclick="abonnement('pro')">
-⭐ PRO — 6€/mois
-</button>
-
-<button onclick="abonnement('expert')">
-👑 EXPERT — 12€/mois
-</button>
-</div>
-
-<div class="box">
-<h2>♿ Accessibilité</h2>
-
-<button onclick="modeContraste()">
-🎨 Mode contraste élevé
-</button>
-</div>
 <body>
 
 <h1>🏗️ App BTP Pro</h1>
 
 <!-- CALCULS -->
 <div class="box">
-<h2>🧮 Calculs Chantier</h2>
+<h2>🧮 Calculs BTP</h2>
 
 <input id="longueur" placeholder="Longueur (m)">
 <input id="largeur" placeholder="Largeur (m)">
-<button onclick="calcM2()">Calcul m²</button>
+<button onclick="calcSurface()">📐 Calcul surface (m²)</button>
+
+<button onclick="calcPerimetre()">📏 Calcul périmètre</button>
 
 <input id="hauteur" placeholder="Hauteur (m)">
-<button onclick="calcM3()">Calcul m³</button>
-
-<input id="penteH" placeholder="Hauteur pente">
-<input id="penteD" placeholder="Distance pente">
-<button onclick="calcPente()">Calcul pente %</button>
+<button onclick="calcVolume()">🧱 Calcul volume (m³)</button>
 
 <div class="result" id="resultat"></div>
 </div>
 
-<!-- MÉTÉO -->
+<!-- QUIZ AIPR / H0B0 -->
 <div class="box">
-<h2>🌦️ Météo Chantier</h2>
+<h2>🧠 Quiz AIPR / H0B0 (40 questions)</h2>
 
-<button onclick="meteo()">Voir météo chantier</button>
+<button onclick="startQuiz()">▶️ Démarrer le quiz</button>
 
-<div class="result" id="meteoResult"></div>
-</div>
-
-<!-- MÉTIERS -->
-<div class="box">
-<h2>🧰 Métiers / Outils</h2>
-
-<button onclick="metier('macon')">Maçon</button>
-<button onclick="metier('vrd')">VRD</button>
-<button onclick="metier('etancheite')">Étanchéité</button>
-<button onclick="metier('echafaudage')">Échafaudage</button>
-
-<div class="result" id="metierResult"></div>
+<div class="result" id="quiz"></div>
 </div>
 
 <script>
 
-// ====================
-// CALCUL M2
-// ====================
+// =====================
+// CALCUL SURFACE
+// =====================
+function calcSurface(){
+  let l = parseFloat(document.getElementById("longueur").value);
+  let L = parseFloat(document.getElementById("largeur").value);
 
-function calcM2(){
-let l = parseFloat(document.getElementById("longueur").value);
-let L = parseFloat(document.getElementById("largeur").value);
+  let res = l * L;
 
-let res = l * L;
-
-document.getElementById("resultat").innerHTML =
-"📐 Surface : " + res + " m²";
-
-speak("Surface " + res + " mètres carrés");
+  document.getElementById("resultat").innerHTML =
+  "📐 Surface : " + res + " m²";
 }
 
-// ====================
-// CALCUL M3
-// ====================
+// =====================
+// PERIMETRE
+// =====================
+function calcPerimetre(){
+  let l = parseFloat(document.getElementById("longueur").value);
+  let L = parseFloat(document.getElementById("largeur").value);
 
-function calcM3(){
-let l = parseFloat(document.getElementById("longueur").value);
-let L = parseFloat(document.getElementById("largeur").value);
-let h = parseFloat(document.getElementById("hauteur").value);
+  let res = 2 * (l + L);
 
-let res = l * L * h;
-
-document.getElementById("resultat").innerHTML =
-"🧱 Volume : " + res + " mètre cube";
-
-speak("Volume " + res + " mètres cubes");
+  document.getElementById("resultat").innerHTML =
+  "📏 Périmètre : " + res + " m";
 }
 
-// ====================
-// CALCUL PENTE
-// ====================
+// =====================
+// VOLUME
+// =====================
+function calcVolume(){
+  let l = parseFloat(document.getElementById("longueur").value);
+  let L = parseFloat(document.getElementById("largeur").value);
+  let h = parseFloat(document.getElementById("hauteur").value);
 
-function calcPente(){
-let h = parseFloat(document.getElementById("penteH").value);
-let d = parseFloat(document.getElementById("penteD").value);
+  let res = l * L * h;
 
-let res = (h/d)*100;
-
-document.getElementById("resultat").innerHTML =
-"📏 Pente : " + res.toFixed(2) + " %";
-
-speak("Pente " + res.toFixed(2) + " pourcent");
+  document.getElementById("resultat").innerHTML =
+  "🧱 Volume : " + res + " m³";
 }
 
-// ====================
-// METEO
-// ====================
+// =====================
+// QUIZ AIPR / H0B0 (40 QUESTIONS)
+// =====================
+let questions = [
+"AIPR : Que signifie AIPR ?",
+"Quel est le rôle du DICT ?",
+"Que faire avant de creuser ?",
+"Quels risques sur un chantier ?",
+"Que faire en cas de câble électrique ?",
+"Qu’est-ce qu’un réseau enterré ?",
+"Qui donne l’autorisation de travaux ?",
+"Que signifie H0B0 ?",
+"Quelle protection obligatoire sur chantier ?",
+"Que faire en cas d’accident ?",
 
-function meteo(){
+"Comment sécuriser une zone de fouille ?",
+"Pourquoi baliser un chantier ?",
+"Que signifie EPC ?",
+"Que signifie EPI ?",
+"Casque obligatoire quand ?",
+"Chaussures de sécurité servent à quoi ?",
+"Risque gaz sur chantier ?",
+"Risque eau sur chantier ?",
+"Travaux à proximité réseau ?",
+"Règles de sécurité générales ?",
 
-let temp = 18;
-let vent = 20;
+"Que faire avant intervention électrique ?",
+"Différence HT / BT ?",
+"Zone de danger électrique ?",
+"Distance sécurité réseau ?",
+"Signalisation chantier ?",
+"Lecture plans réseaux ?",
+"Responsabilité chef chantier ?",
+"Formation obligatoire ?",
+"Travaux sous tension ?",
+"Intervention urgence ?",
 
-let message = "🌤️ Température : "
-+ temp + "°C<br>💨 Vent : "
-+ vent + " km/h<br>";
+"Conduite engins chantier ?",
+"Signalisation piétons ?",
+"Risques engins ?",
+"Zone interdite ?",
+"Travail en hauteur ?",
+"Échafaudage sécurité ?",
+"Harnais obligatoire ?",
+"Chute objet prévention ?",
+"Organisation chantier ?",
+"Consignes générales sécurité ?"
+];
 
-if(vent > 40){
-message += "⚠️ Vent fort chantier";
-}
-else{
-message += "✔️ Conditions normales";
-}
+let index = 0;
 
-document.getElementById("meteoResult").innerHTML = message;
+function startQuiz(){
+  if(index >= questions.length){
+    document.getElementById("quiz").innerHTML = "✅ Quiz terminé";
+    index = 0;
+    return;
+  }
 
-speak("Température " + temp + " degrés");
-}
+  document.getElementById("quiz").innerHTML =
+  "❓ " + questions[index];
 
-// ====================
-// METIERS
-// ====================
-
-function metier(type){
-
-let texte = "";
-
-if(type=="macon"){
-texte = "🧱 Maçon : truelle, bétonnière, ciment";
-}
-
-if(type=="vrd"){
-texte = "🚧 VRD : pelle, niveau laser, compacteur";
-}
-
-if(type=="etancheite"){
-texte = "💧 Étanchéité : membrane, rouleau, chalumeau";
-}
-
-if(type=="echafaudage"){
-texte = "🏗️ Échafaudage : harnais, casque, sécurité";
-}
-
-document.getElementById("metierResult").innerHTML = texte;
-
-speak(texte);
-}
-
-// ====================
-// VOIX ACCESSIBILITÉ
-// ====================
-
-function speak(text){
-let msg = new SpeechSynthesisUtterance(text);
-msg.lang = "fr-FR";
-speechSynthesis.speak(msg);
+  index++;
 }
 
 </script>
-<script src="calculs.js"></script>
-<script src="meteo.js"></script>
-<script src="outils.js"></script>
-<script src="accessibilite.js"></script>
-<script src="abonnement.js"></script>
-<script src="app.js"></script> 
-<script src="utilisateurs.js"></script>
-<script src="gps.js"></script>
-<script src="pdf.js"></script>
-<script src="securite.js"></script>
-<script src="ia.js"></script>
-<script src="offline.js"></script>
-<script src="notifications.js"></script>
-<div class="box">
-<h2>⚙️ Fonctions Avancées</h2>
 
-<button onclick="connexion()">👤 Connexion</button>
-
-<button onclick="gps()">📍 GPS Chantier</button>
-
-<button onclick="exportPDF()">📄 Export PDF</button>
-
-<button onclick="securite()">🚨 Sécurité Chantier</button>
-
-<button onclick="assistantIA()">🧠 Assistant IA</button>
-
-<button onclick="offline()">📶 Mode Hors Ligne</button>
-
-<button onclick="notificationChantier()">🔔 Notifications</button>
-
-</div>
 </body>
 </html>
